@@ -92,8 +92,14 @@ public class MessageManager {
         }
     }
 
-    public void sendMessage(String cmd,Message message){
-        messageLooper.sendMessage(cmd,message);
+    /**
+     * 发送事件
+     *
+     * @param cmd
+     * @param message
+     */
+    public void sendMessage(String cmd, Message message) {
+        messageLooper.sendMessage(cmd, message);
     }
 
     public ListenerContainer getListenerContainer(Activity activity) {

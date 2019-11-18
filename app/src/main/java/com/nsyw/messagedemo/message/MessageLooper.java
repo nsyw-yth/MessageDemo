@@ -21,7 +21,7 @@ public class MessageLooper {
 
     private volatile static MessageLooper mInstance;
     /**
-     * 由于会有频繁的增、删操作，因此采用线程安全的ConCurrentHasMap()
+     * 由于会有频繁的增、删操作，因此采用线程安全的ConCurrentHasMap()，Vector也是线程安全的
      */
     private Map<String, Vector<OnMessageListener>> mMessageReceiver = new ConcurrentHashMap<>();
 
@@ -63,15 +63,13 @@ public class MessageLooper {
     }
 
     /**
-     * 取消注册事件
+     * 注销注册事件
      *
      * @param listener
      */
     public void unRegisterReciver(OnMessageListener listener) {
         if (listener != null) {
-            String removeKey = null;
             Iterator iterator = this.mMessageReceiver.entrySet().iterator();
-            //获取removeKey
             while (iterator.hasNext()) {
                 Map.Entry<String, Vector<OnMessageListener>> entry = (Map.Entry) iterator.next();
                 if (entry != null) {
